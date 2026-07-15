@@ -943,6 +943,19 @@ p {
   object-fit: contain;
   margin-bottom: 15px;
 }
+
+.experience-date{
+    display:inline-block;
+    margin:12px 0 18px;
+    padding:8px 18px;
+    border:1px solid #00e5ff;
+    border-radius:25px;
+    color:#d6dce5;
+    font-size:13px;
+    font-weight:600;
+    background:rgba(0,229,255,.08);
+}
+
 @media (max-width: 768px) {
   .experience {
     width: 90%;
