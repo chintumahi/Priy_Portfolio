@@ -414,3 +414,58 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+
+
+// ================================
+// About Typing Animation
+// ================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const aboutElement = document.getElementById("aboutTyping");
+
+    if (!aboutElement) return;
+
+    const texts = [
+        "Exploring the Future of Technology",
+        "Learning . Building . Innovating",
+        "English . Hindi . Kannada",
+        // "Ethical Hacking"
+    ];
+
+    let textIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeAbout() {
+
+        const current = texts[textIndex];
+
+        if (!deleting) {
+            aboutElement.textContent = current.substring(0, charIndex);
+            charIndex++;
+        } else {
+            aboutElement.textContent = current.substring(0, charIndex);
+            charIndex--;
+        }
+
+        let speed = deleting ? 50 : 100;
+
+        if (!deleting && charIndex > current.length) {
+            deleting = true;
+            speed = 1500;
+        }
+
+        if (deleting && charIndex < 0) {
+            deleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            speed = 500;
+        }
+
+        setTimeout(typeAbout, speed);
+    }
+
+    typeAbout();
+
+});
