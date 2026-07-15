@@ -53,7 +53,8 @@ Priy_Portfolio/
 
 ## 📸 Screenshots
 
-(Add screenshots here)
+![Uploading image.png…]()
+
 
 ---
 
