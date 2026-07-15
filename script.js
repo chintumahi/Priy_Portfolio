@@ -398,3 +398,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// ================================
+// Hidden SDWAN Double Click Easter Egg
+// ================================
+document.addEventListener("DOMContentLoaded", function () {
+    const sdwan = document.getElementById("sdwan-secret");
+
+    if (sdwan) {
+        sdwan.addEventListener("dblclick", function () {
+            window.open(
+                "https://drive.google.com/drive/folders/1I5ieR9SOSuuPQbCITCUbyFMrtclXQIWf?usp=sharing",
+                "_blank",
+                "noopener,noreferrer"
+            );
+        });
+    }
+});

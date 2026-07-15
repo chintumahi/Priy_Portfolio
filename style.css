@@ -2361,3 +2361,67 @@ section, .education-container, .certification-container, .contact-container, .ex
   }
 }
 
+/* ===========================
+   Running Skills Footer
+=========================== */
+
+.skills-ticker{
+    width:100%;
+    overflow:hidden;
+    background:#0a0f1d;
+    border-top:1px solid rgba(0,255,255,.2);
+    border-bottom:1px solid rgba(0,255,255,.2);
+    padding:18px 0;
+    position:relative;
+}
+
+.ticker{
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+.ticker-track{
+    display:inline-flex;
+    align-items:center;
+    gap:60px;
+    animation:scrollTicker 35s linear infinite;
+}
+
+.ticker-track span{
+    color:#00ffff;
+    font-size:18px;
+    font-weight:600;
+    white-space:nowrap;
+    text-shadow:0 0 8px rgba(0,255,255,.6);
+    transition:.3s;
+}
+
+.ticker-track span:hover{
+    color:#ffffff;
+    transform:scale(1.08);
+}
+
+.ticker:hover .ticker-track{
+    animation-play-state:paused;
+}
+
+@keyframes scrollTicker{
+    from{
+        transform:translateX(0);
+    }
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+@media(max-width:768px){
+
+.ticker-track span{
+    font-size:15px;
+}
+
+.ticker-track{
+    gap:35px;
+}
+
+}
