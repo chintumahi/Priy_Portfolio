@@ -604,12 +604,19 @@
   </div>
 
 <form id="contactForm" class="contact-form">
+    <input type="hidden"
+       name="access_key"
+       value="1e7a685a-b32b-4490-a99c-b509142891be">
+
+<input type="checkbox"
+       name="botcheck"
+       style="display:none">
   <div class="form-box">
     <input type="text" name="name" placeholder="Enter Your Name" required />
     <input type="email" name="email" placeholder="Enter Your Email" required />
     <input type="text" name="subject" placeholder="Subject" required />
     <textarea name="message" placeholder="Your Message" required></textarea>
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<!-- <script src="https://cdn.emailjs.com/dist/email.min.js"></script> -->
 
     <button type="submit" class="btn">Send</button>
     <p id="responseMessage" style="margin-top: 10px; color: cyan;"></p>

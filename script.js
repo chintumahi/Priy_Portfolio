@@ -87,34 +87,53 @@ function initScrollSpy() {
 
 // ✅ Contact Form
 function initContactForm() {
+
     const form = document.getElementById("contactForm");
     const responseMessage = document.getElementById("responseMessage");
 
-    if (form && responseMessage) {
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
+    if (!form) return;
 
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData.entries());
+    form.addEventListener("submit", async function (e) {
 
-            responseMessage.textContent = "Sending...";
+        e.preventDefault();
 
-            try {
-                const res = await fetch("https://your-backend-endpoint.com/contact", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data),
-                });
+        responseMessage.style.color = "#00ffff";
+        responseMessage.textContent = "Sending...";
 
-                const result = await res.json();
-                responseMessage.textContent = result.message || "Message sent!";
+        const formData = new FormData(form);
+
+        try {
+
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+
+                responseMessage.style.color = "#00ff99";
+                responseMessage.textContent = "✅ Message sent successfully!";
                 form.reset();
-            } catch (error) {
-                console.error("Error:", error);
-                responseMessage.textContent = "Failed to send message. Try again.";
+
+            } else {
+
+                responseMessage.style.color = "red";
+                responseMessage.textContent = result.message;
+
             }
-        });
-    }
+
+        } catch (error) {
+
+            console.error(error);
+            responseMessage.style.color = "red";
+            responseMessage.textContent = "❌ Failed to send message.";
+
+        }
+
+    });
+
 }
 
 // ✅ Section Reveal Animation on Scroll
@@ -376,26 +395,63 @@ window.addEventListener('resize', () => {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  emailjs.init("4BvTGoGNU5Rgs_6Pu"); // ✅ replace with your public key
 
-  const form = document.getElementById("contactForm");
-  const responseMessage = document.getElementById("responseMessage");
+    const form = document.getElementById("contactForm");
+    const responseMessage = document.getElementById("responseMessage");
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+    if (!form) return;
 
-    responseMessage.textContent = "Sending...";
+    form.addEventListener("submit", async function (e) {
 
-    emailjs.sendForm("service_57sz11w", "template_9tsls1p", form)
-      .then(() => {
-        responseMessage.textContent = "✅ Message sent successfully!";
-        form.reset();
-      })
-      .catch((error) => {
-        console.error("EmailJS Error:", error);
-        responseMessage.textContent = "❌ Failed to send message.";
-      });
-  });
+        e.preventDefault();
+
+        responseMessage.textContent = "Sending...";
+
+        const formData = new FormData(form);
+
+        const object = Object.fromEntries(formData);
+
+        const json = JSON.stringify(object);
+
+        try {
+
+            const response = await fetch("https://api.web3forms.com/submit", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+
+                body: json
+
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+
+                responseMessage.style.color = "#00ff99";
+                responseMessage.textContent = "✅ Message sent successfully!";
+                form.reset();
+
+            } else {
+
+                responseMessage.style.color = "red";
+                responseMessage.textContent = result.message;
+
+            }
+
+        } catch (error) {
+
+            responseMessage.style.color = "red";
+            responseMessage.textContent = "❌ Failed to send message.";
+
+        }
+
+    });
+
 });
 
 // ================================
